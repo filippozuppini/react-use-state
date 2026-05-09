@@ -1,3 +1,4 @@
+import { useState } from "react";
 
 function App() {
 
@@ -34,7 +35,15 @@ function App() {
     }
   ];
 
+  const [isActive, setIsActive] = useState(null)
 
+  function toggleLenguage (id) {
+    console.log(id);
+    if (isActive === id){
+      return setIsActive(null)
+    }
+    setIsActive(id);
+  }
 
   return (
     <>
@@ -47,8 +56,10 @@ function App() {
         {languages.map(lenguage => (
 
           <div className="item" key={lenguage.id}>
-            <button>{lenguage.title}</button>
-            <div className="content">{lenguage.description}</div>
+            <button onClick={()=> toggleLenguage(lenguage.id)}>{lenguage.title}</button>
+            {
+              isActive === lenguage.id && (<div className="content">isActive ? null : {lenguage.description}</div>)
+            }
           </div>
 
         ))}
